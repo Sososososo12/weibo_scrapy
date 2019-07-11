@@ -78,9 +78,9 @@ def get_repost_state(weibo_url,page_num=1):
     return repost_num, content
 
 
-def get_comment_info(content):
+def get_repost_info(content):
     selector = etree.HTML(content)
-    items = selector.xpath('//div[contains(@id,"C_")]')
+    items = selector.xpath('//div[@class="c"]')
     for item in items:
         id = item.xpath('a/@href')[0]
         id_name = item.xpath('a/text()')[0]
@@ -93,5 +93,5 @@ def get_comment_info(content):
 
 weibo_url = 'https://weibo.cn/repost/HCDwlrJRX?uid=1647951825&#rt'
 state = get_repost_state(weibo_url)
-print(state[0])
-# get_comment_info(state[1])
+# print(state[0])
+get_repost_info(state[1])
